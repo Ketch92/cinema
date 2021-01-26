@@ -36,17 +36,11 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public List<Movie> getAll() {
         Transaction transaction = null;
-        Session session = null;
-        try {
-            session = HibernateUtils.getSessionFactory().openSession();
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             Query<Movie> allMovies = session.createQuery("from Movie", Movie.class);
             return allMovies.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Failed to get all movies from DB");
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
