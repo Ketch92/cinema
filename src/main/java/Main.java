@@ -10,7 +10,7 @@ public class Main {
         movie.setTitle("Fast and Furious");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie);
-    
+        
         movieService.getAll().forEach(System.out::println);
     }
 }
