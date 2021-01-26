@@ -11,7 +11,6 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
-        
         movieService.getAll().forEach(System.out::println);
     }
 }
