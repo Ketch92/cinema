@@ -8,7 +8,6 @@
     <artifactId>cinema</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <properties>
         <jdk.version>11</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,17 +16,16 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <junit-jupiter.version>5.7.0</junit-jupiter.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>$JUNIT-JUPITER.VERSION$</version>
-            <scope>test</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -43,7 +41,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <configLocation>$MAVEN.CHECKSTYLE.PLUGIN.CONFIGLOCATION$</configLocation>
+                    <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
@@ -58,9 +56,9 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                     <configuration>
-                        <source>$JDK.VERSION$</source>
-                        <target>$JDK.VERSION$</target>
-                        <encoding>$PROJECT.BUILD.SOURCEENCODING$</encoding>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
             </plugins>
