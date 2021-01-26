@@ -1,4 +1,4 @@
-package dao;
+package core.dao;
 
 import core.model.Movie;
 import java.util.List;

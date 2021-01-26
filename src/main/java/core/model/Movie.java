@@ -7,27 +7,27 @@ public class Movie {
     private String title;
     private String description;
     
-    private Long getId() {
+    public Long getId() {
         return id;
     }
     
-    private void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
-    private String getTitle() {
+    public String getTitle() {
         return title;
     }
     
-    private void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
     
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
     
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     
