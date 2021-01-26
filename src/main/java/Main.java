@@ -1,5 +1,5 @@
-import core.model.Movie;
 import core.lib.Injector;
+import core.model.Movie;
 import core.service.MovieService;
 
 public class Main {
