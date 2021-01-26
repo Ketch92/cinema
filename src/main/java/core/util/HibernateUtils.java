@@ -1,5 +1,6 @@
 package core.util;
 
+import core.model.exception.InitializationException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -13,7 +14,7 @@ public class HibernateUtils {
         try {
             return new Configuration().configure().buildSessionFactory();
         } catch (Exception e) {
-            throw new RuntimeException("Errored while creating the SessionFactory");
+            throw new InitializationException("Errored while creating the SessionFactory", e);
         }
     }
     

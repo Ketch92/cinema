@@ -2,6 +2,7 @@ package core.dao;
 
 import core.lib.Dao;
 import core.model.Movie;
+import core.model.exception.DataProcessingException;
 import core.util.HibernateUtils;
 import java.util.List;
 import org.hibernate.Session;
@@ -24,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Failed to insert movie"
+            throw new DataProcessingException("Failed to insert movie"
                                        + movie.getTitle() + "to DB", e);
         } finally {
             if (session != null) {
@@ -39,7 +40,7 @@ public class MovieDaoImpl implements MovieDao {
             Query<Movie> allMovies = session.createQuery("from Movie", Movie.class);
             return allMovies.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get all movies from DB");
+            throw new DataProcessingException("Failed to get all movies from DB", e);
         }
     }
 }
