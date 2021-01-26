@@ -1,9 +1,11 @@
+package core;
+
 import core.lib.Injector;
 import core.model.Movie;
 import core.service.MovieService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("<YOUR_PACKAGE>");
+    private static Injector injector = Injector.getInstance(Main.class.getPackageName());
     
     public static void main(String[] args) {
         Movie movie = new Movie();
