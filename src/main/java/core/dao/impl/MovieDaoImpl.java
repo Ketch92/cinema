@@ -1,5 +1,6 @@
-package core.dao;
+package core.dao.impl;
 
+import core.dao.MovieDao;
 import core.lib.Dao;
 import core.model.Movie;
 import core.model.exception.DataProcessingException;
