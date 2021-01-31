@@ -36,4 +36,14 @@ public class CinemaHall {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CinemaHall{");
+        sb.append("id=").append(id);
+        sb.append(", capacity=").append(capacity);
+        sb.append(", description='").append(description).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
