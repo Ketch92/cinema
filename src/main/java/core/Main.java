@@ -7,14 +7,22 @@ import core.model.MovieSession;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.service.MovieSessionService;
+import core.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Main {
-    private static Injector injector = Injector.getInstance(Main.class.getPackageName());
+    private static final Injector injector
+            = Injector.getInstance(Main.class.getPackageName());
+    private static final UserService userService
+            = (UserService) injector.getInstance(UserService.class);
+    private static final MovieService movieService
+            = (MovieService) injector.getInstance(MovieService.class);
+    private static final CinemaHallService cinemaHallService
+            = (CinemaHallService) injector.getInstance(CinemaHallService.class);
     
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+        
         
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
@@ -22,9 +30,7 @@ public class Main {
         movieService.getAll().forEach(System.out::println);
     
         System.out.println("\n=============================\n");
-    
-        CinemaHallService cinemaHallService
-                = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+        
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(100);
         cinemaHall.setDescription("4DX big hole");
@@ -50,5 +56,6 @@ public class Main {
                 .forEach(System.out::println);
     
         System.out.println("\n=============================\n");
+
     }
 }
