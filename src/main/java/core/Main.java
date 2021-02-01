@@ -61,5 +61,6 @@ public class Main {
         User user = new User();
         user.setEmail("user.email@email.com");
         user.setPassword("strong_password");
+        userService.add(user);
     }
 }
