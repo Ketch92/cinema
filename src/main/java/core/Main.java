@@ -21,6 +21,8 @@ public class Main {
         movieService.add(movie);
         movieService.getAll().forEach(System.out::println);
     
+        System.out.println("\n==============================\n");
+    
         CinemaHallService cinemaHallService
                 = (CinemaHallService) injector.getInstance(CinemaHallService.class);
         CinemaHall cinemaHall = new CinemaHall();
@@ -38,7 +40,7 @@ public class Main {
         session2.setMovie(movie);
         session2.setCinemaHall(cinemaHall);
         session2.setShowTime(LocalDateTime.now().plusHours(24));
-        
+    
         MovieSessionService movieSessionService
                 = (MovieSessionService) injector.getInstance(MovieSessionService.class);
         movieSessionService.add(session1);
@@ -46,5 +48,7 @@ public class Main {
         System.out.println("\n//print all available sessions ----------------------\n");
         movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now())
                 .forEach(System.out::println);
+        
+        System.out.println("\n==============================\n");
     }
 }
