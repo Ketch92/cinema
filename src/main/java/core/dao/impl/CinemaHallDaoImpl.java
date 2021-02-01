@@ -22,7 +22,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             session.save(cinemaHall);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null || transaction.isActive()) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Errored while adding the " + cinemaHall, e);
