@@ -14,11 +14,9 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 @Dao
 public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements MovieSessionDao {
-    
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {

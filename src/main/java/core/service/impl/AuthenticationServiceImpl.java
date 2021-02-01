@@ -19,7 +19,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User login(String email, String password) throws AuthenticationException {
         User user = userService.findByEmail(email)
                 .orElseThrow(() -> new AuthenticationException(AUTHENTICATION_ERROR_MESSAGE));
-        if (AuthenticationUtils.hashPassword(password, user.getSalt()).equals(user.getPassword())) {
+        if (AuthenticationUtils.hashPassword(password, user.getSalt()).equalsIgnoreCase(user.getPassword())) {
             return user;
         }
         throw new AuthenticationException(AUTHENTICATION_ERROR_MESSAGE);

@@ -5,26 +5,25 @@ import core.model.CinemaHall;
 import core.model.Movie;
 import core.model.MovieSession;
 import core.model.User;
+import core.model.exception.AuthenticationException;
+import core.service.AuthenticationService;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.service.MovieSessionService;
-import core.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Main {
     private static final Injector injector
             = Injector.getInstance(Main.class.getPackageName());
-    private static final UserService userService
-            = (UserService) injector.getInstance(UserService.class);
     private static final MovieService movieService
             = (MovieService) injector.getInstance(MovieService.class);
     private static final CinemaHallService cinemaHallService
             = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+    private static final AuthenticationService authenticationService =
+            (AuthenticationService) injector.getInstance(AuthenticationService.class);
     
-    public static void main(String[] args) {
-        
-        
+    public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
         movieService.add(movie);
@@ -61,8 +60,18 @@ public class Main {
         User user = new User();
         user.setEmail("user.email@email.com");
         user.setPassword("strong_password");
-        userService.add(user);
-        User newUser = userService.findByEmail("user.email@email.com").get();
         
+        User anotherUser = new User();
+        String anotherUserEmail = "another@email.com";
+        String anotherUserPsw = "ghadghfdas";
+        anotherUser.setEmail(anotherUserEmail);
+        anotherUser.setPassword(anotherUserPsw);
+        
+        user = authenticationService.register(user.getEmail(), user.getPassword());
+        anotherUser = authenticationService.register(anotherUser.getEmail(),
+                anotherUser.getPassword());
+        User loggedUser = authenticationService.login(anotherUser.getEmail(),
+                anotherUserPsw);
+        System.out.println("Is registered user logged in " + anotherUser.equals(loggedUser));
     }
 }
