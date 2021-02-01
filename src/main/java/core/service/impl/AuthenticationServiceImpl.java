@@ -29,7 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User register(String email, String password) {
         User user = new User();
         user.setSalt(AuthenticationUtils.getSalt());
-        user.setPassword(password);
+        user.setPassword(AuthenticationUtils.hashPassword(password, user.getSalt()));
         user.setEmail(email);
         return userService.add(user);
     }
