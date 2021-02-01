@@ -4,6 +4,7 @@ import core.lib.Injector;
 import core.model.CinemaHall;
 import core.model.Movie;
 import core.model.MovieSession;
+import core.model.User;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.service.MovieSessionService;
@@ -56,6 +57,9 @@ public class Main {
                 .forEach(System.out::println);
     
         System.out.println("\n=============================\n");
-
+        
+        User user = new User();
+        user.setEmail("user.email@email.com");
+        user.setPassword("strong_password");
     }
 }
