@@ -7,13 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public abstract class AbstractDao<T> {
-    protected final SessionFactory factory;
-    
-    protected AbstractDao(SessionFactory sessionFactory) {
-        this.factory = sessionFactory;
-    }
-    
-    public T create(T entity) {
+    public T create(T entity, SessionFactory factory) {
         Transaction transaction = null;
         Session session = null;
         try {
@@ -34,7 +28,7 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public T get(Class<T> clazz, Long id) {
+    public T get(Class<T> clazz, Long id, SessionFactory factory) {
         try (Session session = factory.openSession()) {
             return session.get(clazz, id);
         } catch (Exception e) {
@@ -43,7 +37,7 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public List<T> getAll(Class<T> clazz) {
+    public List<T> getAll(Class<T> clazz, SessionFactory factory) {
         try (Session session = factory.openSession()) {
             Query<T> allUsers = session.createQuery("from " + clazz.getSimpleName(), clazz);
             return allUsers.getResultList();
@@ -52,7 +46,7 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public void remove(T entity) {
+    public void remove(T entity, SessionFactory factory) {
         Transaction transaction = null;
         Session session = null;
         try {
