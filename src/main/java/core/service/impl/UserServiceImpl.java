@@ -1,5 +1,6 @@
 package core.service.impl;
 
+import core.dao.UserDao;
 import core.lib.Inject;
 import core.lib.Service;
 import core.model.User;
