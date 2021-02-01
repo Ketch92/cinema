@@ -2,16 +2,14 @@ package core.dao.impl;
 
 import core.dao.MovieSessionDao;
 import core.lib.Dao;
-import core.model.CinemaHall;
-import core.model.Movie;
 import core.model.MovieSession;
 import core.model.exception.DataProcessingException;
 import core.util.HibernateUtils;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -28,17 +26,20 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             CriteriaQuery<MovieSession> query = criteriaBuilder.createQuery(MovieSession.class);
             
             Root<MovieSession> movieSessionRoot = query.from(MovieSession.class);
-            Join<MovieSession, CinemaHall> movieSessionCinemaHallJoin
-                    = movieSessionRoot.join("MovieSession.movie_id");
-            Join<MovieSession, Movie> movieSessionMovieJoin
-                    = movieSessionRoot.join("MovieSession_.movie", JoinType.INNER);
+            movieSessionRoot.fetch("movie", JoinType.INNER);
+            movieSessionRoot.fetch("cinemaHall", JoinType.INNER);
             
             Predicate idPredicate = criteriaBuilder
-                    .equal(movieSessionRoot.get("movie_id"), movieId);
-            Predicate datePredicate = criteriaBuilder
-                    .like(movieSessionRoot.get("showtime"), date.toString());
+                    .equal(movieSessionRoot.get("movie"), movieId);
+            Predicate dateFromPredicate = criteriaBuilder
+                    .greaterThanOrEqualTo(movieSessionRoot.get("showTime")
+                            , date.atTime(LocalTime.now()));
+            Predicate dateToPredicate = criteriaBuilder
+                    .lessThanOrEqualTo(movieSessionRoot.get("showTime")
+                            , date.atTime(LocalTime.of(23, 59, 59)));
             
-            query.select(movieSessionRoot).where(criteriaBuilder.and(idPredicate, datePredicate));
+            query.select(movieSessionRoot).where(criteriaBuilder
+                    .and(idPredicate, dateFromPredicate, dateToPredicate));
             return session.createQuery(query).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Errored while retrieving data from DB", e);

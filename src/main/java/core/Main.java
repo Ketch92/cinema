@@ -29,14 +29,21 @@ public class Main {
         cinemaHallService.add(cinemaHall);
         cinemaHallService.getAll().forEach(System.out::println);
     
-        MovieSession session = new MovieSession();
-        session.setMovie(movie);
-        session.setCinemaHall(cinemaHall);
-        session.setShowTime(LocalDateTime.now().plusHours(1));
+        MovieSession session1 = new MovieSession();
+        session1.setMovie(movie);
+        session1.setCinemaHall(cinemaHall);
+        session1.setShowTime(LocalDateTime.now().plusHours(1));
+    
+        MovieSession session2 = new MovieSession();
+        session2.setMovie(movie);
+        session2.setCinemaHall(cinemaHall);
+        session2.setShowTime(LocalDateTime.now().plusHours(24));
         
         MovieSessionService movieSessionService
                 = (MovieSessionService) injector.getInstance(MovieSessionService.class);
-        movieSessionService.add(session);
+        movieSessionService.add(session1);
+        movieSessionService.add(session2);
+        System.out.println("\n//print all available sessions ----------------------\n");
         movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now())
                 .forEach(System.out::println);
     }
