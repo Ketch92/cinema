@@ -62,5 +62,7 @@ public class Main {
         user.setEmail("user.email@email.com");
         user.setPassword("strong_password");
         userService.add(user);
+        User newUser = userService.findByEmail("user.email@email.com").get();
+        
     }
 }
