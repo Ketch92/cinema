@@ -1,9 +1,10 @@
-package core.service;
+package core.service.impl;
 
 import core.dao.MovieDao;
 import core.lib.Inject;
 import core.lib.Service;
 import core.model.Movie;
+import core.service.MovieService;
 import java.util.List;
 
 @Service
