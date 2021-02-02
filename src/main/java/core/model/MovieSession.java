@@ -55,12 +55,11 @@ public class MovieSession {
     
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("MovieSession{");
-        sb.append("id=").append(id);
-        sb.append(", movie=").append(movie);
-        sb.append(", cinemaHall=").append(cinemaHall);
-        sb.append(", showTime=").append(showTime);
-        sb.append('}');
-        return sb.toString();
+        return "MovieSession{"
+               + "id=" + id
+               + ", movie=" + movie
+               + ", cinemaHall=" + cinemaHall
+               + ", showTime=" + showTime
+               + '}';
     }
 }

@@ -5,7 +5,7 @@ import core.lib.Inject;
 import core.lib.Service;
 import core.model.User;
 import core.service.UserService;
-import core.util.AuthenticationUtils;
+import core.util.AuthenticationUtil;
 import java.util.Optional;
 
 @Service
@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User add(User user) {
-        user.setSalt(AuthenticationUtils.getSalt());
-        user.setPassword(AuthenticationUtils.hashPassword(user.getPassword(), user.getSalt()));
+        user.setSalt(AuthenticationUtil.getSalt());
+        user.setPassword(AuthenticationUtil.hashPassword(user.getPassword(), user.getSalt()));
         return userDao.add(user);
     }
     

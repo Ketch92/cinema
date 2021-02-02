@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-public class AuthenticationUtils {
+public class AuthenticationUtil {
     private static final String SHA_512_ALGO = "SHA-512";
     
     public static String hashPassword(String password, byte[] salt) {

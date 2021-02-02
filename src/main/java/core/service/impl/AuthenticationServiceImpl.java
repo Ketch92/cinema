@@ -6,7 +6,8 @@ import core.model.User;
 import core.model.exception.AuthenticationException;
 import core.service.AuthenticationService;
 import core.service.UserService;
-import core.util.AuthenticationUtils;
+import core.util.AuthenticationUtil;
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -17,11 +18,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        User user = userService.findByEmail(email)
-                .orElseThrow(() -> new AuthenticationException(AUTHENTICATION_ERROR_MESSAGE));
-        if (AuthenticationUtils.hashPassword(password,
-                user.getSalt()).equalsIgnoreCase(user.getPassword())) {
-            return user;
+        Optional<User> user = userService.findByEmail(email);
+        if (user.isPresent() && AuthenticationUtil.hashPassword(password,
+                user.get().getSalt()).equals(user.get().getPassword())) {
+            return user.get();
         }
         throw new AuthenticationException(AUTHENTICATION_ERROR_MESSAGE);
     }
