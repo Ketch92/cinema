@@ -33,10 +33,10 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
                     .equal(movieSessionRoot.get("movie"), movieId);
             Predicate dateFromPredicate = criteriaBuilder
                     .greaterThanOrEqualTo(movieSessionRoot.get("showTime"),
-                            date.atStartOfDay();
+                            date.atStartOfDay());
             Predicate dateToPredicate = criteriaBuilder
                     .lessThanOrEqualTo(movieSessionRoot.get("showTime"),
-                            date.atTime(LocalTime.of(23, 59, 59)));
+                            date.atTime(LocalTime.MAX));
             
             query.select(movieSessionRoot).where(criteriaBuilder
                     .and(idPredicate, dateFromPredicate, dateToPredicate));
