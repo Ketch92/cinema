@@ -22,7 +22,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             Query<User> query = session.createQuery("from User where email = :email",
                     User.class);
             query.setParameter("email", email);
-            return Optional.of(query.getSingleResult());
+            return query.uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessingException("Failed getting a user by " + email, e);
         }
