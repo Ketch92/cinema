@@ -30,7 +30,7 @@ public class Main {
         movieService.getAll().forEach(System.out::println);
     
         System.out.println("\n=============================\n");
-        
+
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(100);
         cinemaHall.setDescription("4DX big hole");
