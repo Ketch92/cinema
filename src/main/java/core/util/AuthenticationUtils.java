@@ -6,10 +6,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class AuthenticationUtils {
+    private static final String SHA_512_ALGO = "SHA-512";
+    
     public static String hashPassword(String password, byte[] salt) {
         StringBuilder hashedPassword = new StringBuilder();
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+            MessageDigest messageDigest = MessageDigest.getInstance(SHA_512_ALGO);
             messageDigest.update(salt);
             byte[] digest = messageDigest.digest(password.getBytes());
             for (byte b : digest) {
