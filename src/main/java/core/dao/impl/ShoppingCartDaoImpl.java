@@ -4,6 +4,7 @@ import core.dao.ShoppingCartDao;
 import core.lib.Dao;
 import core.model.ShoppingCart;
 import core.model.User;
+import core.model.exception.DataProcessingException;
 import core.util.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,9 +21,17 @@ public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements Sh
     public ShoppingCart getByUser(User user) {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             Query<ShoppingCart> query = session
-                    .createQuery("from ShoppingCart where user = :user", ShoppingCart.class);
+                    .createQuery("from ShoppingCart sc "
+                                 + " left join fetch sc.ticketList tl"
+                                 + " left join fetch tl.movieSession ms"
+                                 + " left join fetch ms.movie"
+                                 + " left join fetch ms.cinemaHall"
+                                 + " where sc.user = :user", ShoppingCart.class);
             query.setParameter("user", user);
             return query.getSingleResult();
+        } catch (Exception e) {
+            throw new DataProcessingException("An error has occurred while retrieving the data for "
+                                              + user);
         }
     }
     
@@ -39,6 +48,8 @@ public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements Sh
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
+            throw new DataProcessingException("An error has occurred while updating "
+                                              + shoppingCart);
         } finally {
             if (session != null) {
                 session.close();

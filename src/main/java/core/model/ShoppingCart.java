@@ -49,7 +49,7 @@ public class ShoppingCart {
         return "ShoppingCart{"
                + "id=" + id
                + ", ticketList=" + ticketList
-               + ", user=" + user.getEmail()
+               + ", user=" + user
                + '}';
     }
     

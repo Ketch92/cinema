@@ -1,10 +1,11 @@
-package core.service.impl;
+package core.security;
 
 import core.lib.Inject;
 import core.lib.Service;
 import core.model.User;
 import core.model.exception.AuthenticationException;
 import core.security.AuthenticationService;
+import core.service.ShoppingCartService;
 import core.service.UserService;
 import core.util.AuthenticationUtil;
 import java.util.Optional;
@@ -15,6 +16,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             = "User with given email and/or password wasn't found";
     @Inject
     private UserService userService;
+    @Inject
+    private ShoppingCartService shoppingCartService;
     
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -31,6 +34,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setPassword(password);
         user.setEmail(email);
-        return userService.add(user);
+        user = userService.add(user);
+        shoppingCartService.registerNewShoppingCart(user);
+        return user;
     }
 }
