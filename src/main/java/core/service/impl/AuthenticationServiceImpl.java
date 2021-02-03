@@ -4,7 +4,7 @@ import core.lib.Inject;
 import core.lib.Service;
 import core.model.User;
 import core.model.exception.AuthenticationException;
-import core.service.AuthenticationService;
+import core.security.AuthenticationService;
 import core.service.UserService;
 import core.util.AuthenticationUtil;
 import java.util.Optional;

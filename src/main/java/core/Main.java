@@ -6,7 +6,7 @@ import core.model.Movie;
 import core.model.MovieSession;
 import core.model.User;
 import core.model.exception.AuthenticationException;
-import core.service.AuthenticationService;
+import core.security.AuthenticationService;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.service.MovieSessionService;
