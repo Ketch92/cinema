@@ -61,11 +61,10 @@ public class Movie {
     
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Movie{");
-        sb.append("id=").append(id);
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Movie{"
+               + "id=" + id
+               + ", title='" + title + '\''
+               + ", description='" + description + '\''
+               + '}';
     }
 }

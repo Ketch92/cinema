@@ -14,11 +14,9 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 @Dao
-public class MovieSessionDaoImpl implements MovieSessionDao {
-    
+public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements MovieSessionDao {
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
@@ -48,23 +46,6 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     
     @Override
     public MovieSession add(MovieSession movieSession) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtils.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.save(movieSession);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Errored while adding the " + movieSession, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return movieSession;
+        return super.create(movieSession, HibernateUtils.getSessionFactory());
     }
 }
