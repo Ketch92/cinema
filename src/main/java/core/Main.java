@@ -71,5 +71,9 @@ public class Main {
         User loggedUser = authenticationService.login(anotherUserEmail,
                 anotherUserPsw);
         System.out.println("Is registered user logged in " + anotherUser.equals(loggedUser));
+    
+        System.out.println("\n=============================\n");
+        
+        
     }
 }

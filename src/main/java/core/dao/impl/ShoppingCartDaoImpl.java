@@ -1,6 +1,7 @@
 package core.dao.impl;
 
 import core.dao.ShoppingCartDao;
+import core.lib.Dao;
 import core.model.ShoppingCart;
 import core.model.User;
 import core.util.HibernateUtils;
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+@Dao
 public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements ShoppingCartDao {
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
