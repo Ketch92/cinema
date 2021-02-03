@@ -19,7 +19,9 @@ public class MovieSession {
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cinema_hall")
     private CinemaHall cinemaHall;
+    @JoinColumn(name = "show_time")
     private LocalDateTime showTime;
     
     public Long getId() {
