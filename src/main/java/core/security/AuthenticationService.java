@@ -1,4 +1,4 @@
-package core.service;
+package core.security;
 
 import core.model.User;
 import core.model.exception.AuthenticationException;

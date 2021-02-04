@@ -4,12 +4,14 @@ import core.lib.Injector;
 import core.model.CinemaHall;
 import core.model.Movie;
 import core.model.MovieSession;
+import core.model.ShoppingCart;
 import core.model.User;
 import core.model.exception.AuthenticationException;
-import core.service.AuthenticationService;
+import core.security.AuthenticationService;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.service.MovieSessionService;
+import core.service.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,8 +26,10 @@ public class Main {
             = (CinemaHallService) injector.getInstance(CinemaHallService.class);
     private static final MovieSessionService sessionService
             = (MovieSessionService) injector.getInstance(MovieSessionService.class);
-    private static final AuthenticationService authenticationService =
-            (AuthenticationService) injector.getInstance(AuthenticationService.class);
+    private static final AuthenticationService authenticationService
+            = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+    private static final ShoppingCartService shoppingCartService
+            = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
     
     public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
@@ -71,5 +75,13 @@ public class Main {
         User loggedUser = authenticationService.login(anotherUserEmail,
                 anotherUserPsw);
         System.out.println("Is registered user logged in " + anotherUser.equals(loggedUser));
+    
+        System.out.println("\n=============================\n");
+    
+        ShoppingCart byUser = shoppingCartService.getByUser(loggedUser);
+        System.out.println(byUser);
+        shoppingCartService.addSession(session1, loggedUser);
+        byUser = shoppingCartService.getByUser(loggedUser);
+        System.out.println(byUser);
     }
 }
