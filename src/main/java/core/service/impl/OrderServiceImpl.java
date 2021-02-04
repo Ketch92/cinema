@@ -9,6 +9,7 @@ import core.model.User;
 import core.service.OrderService;
 import core.service.ShoppingCartService;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,9 +24,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         order.setOrderDate(LocalDateTime.now());
         order.setUser(shoppingCart.getUser());
-        order.setTickets(shoppingCart.getTicketList());
+        order.setTickets(new ArrayList<>(shoppingCart.getTicketList()));
+        orderDao.add(order);
         shoppingCartService.clear(shoppingCart);
-        return orderDao.add(order);
+        return order;
     }
     
     @Override

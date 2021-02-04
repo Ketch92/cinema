@@ -2,8 +2,10 @@ package core.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ public class Order {
     private Long id;
     @OneToMany
     private List<Ticket> tickets;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @Column(name = "order_date")
     private LocalDateTime orderDate;
@@ -54,5 +56,35 @@ public class Order {
     
     public void setUser(User user) {
         this.user = user;
+    }
+    
+    @Override
+    public String toString() {
+        return "Order{"
+               + "id=" + id
+               + ", tickets=" + tickets
+               + ", user=" + user
+               + ", orderDate=" + orderDate
+               + '}';
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Order order = (Order) o;
+        return Objects.equals(id, order.id)
+               && Objects.equals(tickets, order.tickets)
+               && Objects.equals(user, order.user)
+               && Objects.equals(orderDate, order.orderDate);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tickets, user, orderDate);
     }
 }
