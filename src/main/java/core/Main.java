@@ -83,5 +83,9 @@ public class Main {
         shoppingCartService.addSession(session1, loggedUser);
         byUser = shoppingCartService.getByUser(loggedUser);
         System.out.println(byUser);
+        
+        System.out.println("\n=============================\n");
+        
+        
     }
 }
