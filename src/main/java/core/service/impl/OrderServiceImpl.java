@@ -7,16 +7,25 @@ import core.model.Order;
 import core.model.ShoppingCart;
 import core.model.User;
 import core.service.OrderService;
+import core.service.ShoppingCartService;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     @Inject
     private OrderDao orderDao;
+    @Inject
+    private ShoppingCartService shoppingCartService;
     
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {
-        return orderDao.completeOrder(shoppingCart);
+        Order order = new Order();
+        order.setOrderDate(LocalDateTime.now());
+        order.setUser(shoppingCart.getUser());
+        order.setTickets(shoppingCart.getTicketList());
+        shoppingCartService.clear(shoppingCart);
+        return orderDao.add(order);
     }
     
     @Override

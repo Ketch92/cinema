@@ -2,22 +2,16 @@ package core.dao.impl;
 
 import core.dao.OrderDao;
 import core.model.Order;
-import core.model.ShoppingCart;
 import core.model.User;
 import core.model.exception.DataProcessingException;
 import core.util.HibernateUtils;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     @Override
-    public Order completeOrder(ShoppingCart shoppingCart) {
-        Order order = new Order();
-        order.setOrderDate(LocalDateTime.now());
-        order.setUser(shoppingCart.getUser());
-        order.setTickets(shoppingCart.getTicketList());
+    public Order add(Order order) {
         return super.create(order, HibernateUtils.getSessionFactory());
     }
     

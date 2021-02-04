@@ -2,6 +2,7 @@ package core.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Order {
     private List<Ticket> tickets;
     @ManyToOne
     private User user;
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
     
     public Long getId() {
