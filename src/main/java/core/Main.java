@@ -11,6 +11,7 @@ import core.security.AuthenticationService;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.service.MovieSessionService;
+import core.service.OrderService;
 import core.service.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,6 +31,8 @@ public class Main {
             = (AuthenticationService) injector.getInstance(AuthenticationService.class);
     private static final ShoppingCartService shoppingCartService
             = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+    private static final OrderService orderService
+            = (OrderService) injector.getInstance(OrderService.class);
     
     public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
@@ -83,5 +86,10 @@ public class Main {
         shoppingCartService.addSession(session1, loggedUser);
         byUser = shoppingCartService.getByUser(loggedUser);
         System.out.println(byUser);
+        
+        System.out.println("\n=============================\n");
+        
+        orderService.completeOrder(byUser);
+        orderService.getOrdersHistory(loggedUser).forEach(System.out::println);
     }
 }
