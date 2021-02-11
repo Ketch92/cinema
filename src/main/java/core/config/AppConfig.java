@@ -38,12 +38,10 @@ public class AppConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        
         Properties prop = new Properties();
         prop.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         prop.setProperty("hibernate.hbm2ddl.auto",
                 environment.getProperty("hibernate.hbm2ddl.auto"));
-        
         factoryBean.setHibernateProperties(prop);
         factoryBean.setPackagesToScan("core.model");
         return factoryBean;
