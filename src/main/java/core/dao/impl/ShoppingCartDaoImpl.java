@@ -1,25 +1,29 @@
 package core.dao.impl;
 
 import core.dao.ShoppingCartDao;
-import core.lib.Dao;
 import core.model.ShoppingCart;
 import core.model.User;
 import core.model.exception.DataProcessingException;
-import core.util.HibernateUtils;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements ShoppingCartDao {
+    public ShoppingCartDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+    
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
-        return super.create(shoppingCart, HibernateUtils.getSessionFactory());
+        return super.create(shoppingCart);
     }
     
     @Override
     public ShoppingCart getByUser(User user) {
-        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+        try (Session session = getSessionFactory().openSession()) {
             Query<ShoppingCart> query = session
                     .createQuery("from ShoppingCart sc "
                                  + " left join fetch sc.ticketList tl"
@@ -40,7 +44,7 @@ public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements Sh
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtils.getSessionFactory().openSession();
+            session = getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.update(shoppingCart);
             transaction.commit();

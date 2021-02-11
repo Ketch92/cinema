@@ -1,8 +1,6 @@
 package core.service.impl;
 
 import core.dao.OrderDao;
-import core.lib.Inject;
-import core.lib.Service;
 import core.model.Order;
 import core.model.ShoppingCart;
 import core.model.User;
@@ -11,13 +9,17 @@ import core.service.ShoppingCartService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Inject
     private OrderDao orderDao;
-    @Inject
     private ShoppingCartService shoppingCartService;
+    
+    public OrderServiceImpl(OrderDao orderDao, ShoppingCartService shoppingCartService) {
+        this.orderDao = orderDao;
+        this.shoppingCartService = shoppingCartService;
+    }
     
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {

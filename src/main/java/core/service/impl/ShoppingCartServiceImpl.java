@@ -2,20 +2,22 @@ package core.service.impl;
 
 import core.dao.ShoppingCartDao;
 import core.dao.TicketDao;
-import core.lib.Inject;
-import core.lib.Service;
 import core.model.MovieSession;
 import core.model.ShoppingCart;
 import core.model.Ticket;
 import core.model.User;
 import core.service.ShoppingCartService;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    @Inject
     private ShoppingCartDao shoppingCartDao;
-    @Inject
     private TicketDao ticketDao;
+    
+    public ShoppingCartServiceImpl(ShoppingCartDao shoppingCartDao, TicketDao ticketDao) {
+        this.shoppingCartDao = shoppingCartDao;
+        this.ticketDao = ticketDao;
+    }
     
     @Override
     public void addSession(MovieSession movieSession, User user) {

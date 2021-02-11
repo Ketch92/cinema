@@ -7,11 +7,21 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public abstract class AbstractDao<T> {
-    public T create(T entity, SessionFactory factory) {
+    private SessionFactory sessionFactory;
+    
+    public AbstractDao(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+    
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+    
+    public T create(T entity) {
         Transaction transaction = null;
         Session session = null;
         try {
-            session = factory.openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
@@ -28,8 +38,8 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public T get(Class<T> clazz, Long id, SessionFactory factory) {
-        try (Session session = factory.openSession()) {
+    public T get(Class<T> clazz, Long id) {
+        try (Session session = sessionFactory.openSession()) {
             return session.get(clazz, id);
         } catch (Exception e) {
             throw new RuntimeException("Errored while retrieving data by id "
@@ -37,8 +47,8 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public List<T> getAll(Class<T> clazz, SessionFactory factory) {
-        try (Session session = factory.openSession()) {
+    public List<T> getAll(Class<T> clazz) {
+        try (Session session = sessionFactory.openSession()) {
             Query<T> allUsers = session.createQuery("from " + clazz.getSimpleName(), clazz);
             return allUsers.getResultList();
         } catch (Exception e) {
@@ -46,11 +56,11 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public void remove(T entity, SessionFactory factory) {
+    public void remove(T entity) {
         Transaction transaction = null;
         Session session = null;
         try {
-            session = factory.openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();

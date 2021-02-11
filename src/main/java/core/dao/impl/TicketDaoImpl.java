@@ -1,14 +1,18 @@
 package core.dao.impl;
 
 import core.dao.TicketDao;
-import core.lib.Dao;
 import core.model.Ticket;
-import core.util.HibernateUtils;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class TicketDaoImpl extends AbstractDao<Ticket> implements TicketDao {
+    public TicketDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+    
     @Override
     public Ticket add(Ticket ticket) {
-        return super.create(ticket, HibernateUtils.getSessionFactory());
+        return super.create(ticket);
     }
 }

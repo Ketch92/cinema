@@ -1,17 +1,19 @@
 package core.service.impl;
 
 import core.dao.UserDao;
-import core.lib.Inject;
-import core.lib.Service;
 import core.model.User;
 import core.service.UserService;
 import core.util.AuthenticationUtil;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Inject
     private UserDao userDao;
+    
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
     
     @Override
     public User add(User user) {

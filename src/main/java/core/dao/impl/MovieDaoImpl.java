@@ -1,20 +1,24 @@
 package core.dao.impl;
 
 import core.dao.MovieDao;
-import core.lib.Dao;
 import core.model.Movie;
-import core.util.HibernateUtils;
 import java.util.List;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
+    public MovieDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+    
     @Override
     public Movie add(Movie movie) {
-        return super.create(movie, HibernateUtils.getSessionFactory());
+        return super.create(movie);
     }
     
     @Override
     public List<Movie> getAll() {
-        return super.getAll(Movie.class, HibernateUtils.getSessionFactory());
+        return super.getAll(Movie.class);
     }
 }
