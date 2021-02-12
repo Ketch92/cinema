@@ -18,6 +18,11 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     }
     
     @Override
+    public Movie get(Long id) {
+        return super.get(Movie.class, id);
+    }
+    
+    @Override
     public List<Movie> getAll() {
         return super.getAll(Movie.class);
     }

@@ -18,6 +18,11 @@ public class CinemaHallDaoImpl extends AbstractDao<CinemaHall> implements Cinema
     }
     
     @Override
+    public CinemaHall get(Long id) {
+        return super.get(CinemaHall.class, id);
+    }
+    
+    @Override
     public List<CinemaHall> getAll() {
         return super.getAll(CinemaHall.class);
     }
