@@ -1,22 +1,26 @@
 package core.security;
 
-import core.lib.Inject;
-import core.lib.Service;
 import core.model.User;
 import core.model.exception.AuthenticationException;
 import core.service.ShoppingCartService;
 import core.service.UserService;
 import core.util.AuthenticationUtil;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final String AUTHENTICATION_ERROR_MESSAGE
             = "User with given email and/or password wasn't found";
-    @Inject
+    
     private UserService userService;
-    @Inject
     private ShoppingCartService shoppingCartService;
+    
+    public AuthenticationServiceImpl(UserService userService,
+                                     ShoppingCartService shoppingCartService) {
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+    }
     
     @Override
     public User login(String email, String password) throws AuthenticationException {
