@@ -1,7 +1,5 @@
 package core.controller;
 
-import core.model.Movie;
-import core.model.MovieSession;
 import core.model.dto.MovieRequestDto;
 import core.model.dto.MovieResponseDto;
 import core.service.MovieService;
@@ -26,7 +24,6 @@ public class MovieController {
         this.movieMapper = movieMapper;
     }
     
-    
     @GetMapping
     public List<MovieResponseDto> getMovies() {
         return movieService.getAll().stream()
@@ -42,6 +39,5 @@ public class MovieController {
     @PostMapping
     public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
         movieService.add(movieMapper.mapFromDto(movieRequestDto));
-        System.out.println("Movie was added to DB");
     }
 }

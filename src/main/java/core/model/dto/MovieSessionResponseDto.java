@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class MovieSessionResponseDto {
     private Long id;
     private String movieTitle;
-    private Long cinemaHallId;
+    private int cinemaHallCapacity;
     private String cinemaHallDescription;
     private LocalDateTime showTime;
     
@@ -14,12 +14,12 @@ public class MovieSessionResponseDto {
     
     public MovieSessionResponseDto(Long id,
                                    String movieTitle,
-                                   Long cinemaHallId,
+                                   int cinemaHallCapacity,
                                    String cinemaHallDescription,
                                    LocalDateTime showTime) {
         this.id = id;
         this.movieTitle = movieTitle;
-        this.cinemaHallId = cinemaHallId;
+        this.cinemaHallCapacity = cinemaHallCapacity;
         this.cinemaHallDescription = cinemaHallDescription;
         this.showTime = showTime;
     }
@@ -40,12 +40,12 @@ public class MovieSessionResponseDto {
         this.movieTitle = movieTitle;
     }
     
-    public Long getCinemaHallId() {
-        return cinemaHallId;
+    public int getCinemaHallCapacity() {
+        return cinemaHallCapacity;
     }
     
-    public void setCinemaHallId(Long cinemaHallId) {
-        this.cinemaHallId = cinemaHallId;
+    public void setCinemaHallCapacity(int cinemaHallCapacity) {
+        this.cinemaHallCapacity = cinemaHallCapacity;
     }
     
     public String getCinemaHallDescription() {
@@ -69,7 +69,7 @@ public class MovieSessionResponseDto {
         return "MovieSessionResponseDto{"
                + "id=" + id
                + ", movieTitle='" + movieTitle + '\''
-               + ", cinemaHallId='" + cinemaHallId + '\''
+               + ", cinemaHallId='" + cinemaHallCapacity + '\''
                + ", cinemaHallDescription='" + cinemaHallDescription + '\''
                + ", showTime=" + showTime
                + '}';

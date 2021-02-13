@@ -25,7 +25,7 @@ public class MoviesSessionMapperImpl implements MovieSessionMapper {
     public MovieSessionResponseDto mapToDto(MovieSession movieSession) {
         return new MovieSessionResponseDto(movieSession.getId(),
                 movieSession.getMovie().getTitle(),
-                movieSession.getCinemaHall().getId(),
+                movieSession.getCinemaHall().getCapacity(),
                 movieSession.getCinemaHall().getDescription(),
                 movieSession.getShowTime());
     }
