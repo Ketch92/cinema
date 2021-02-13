@@ -4,7 +4,9 @@ import core.model.Movie;
 import core.model.dto.MovieRequestDto;
 import core.model.dto.MovieResponseDto;
 import core.util.mapper.MovieMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MovieMapperImpl implements MovieMapper {
     
     @Override

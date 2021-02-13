@@ -4,7 +4,9 @@ import core.model.CinemaHall;
 import core.model.dto.CinemaHallRequestDto;
 import core.model.dto.CinemaHallResponseDto;
 import core.util.mapper.CinemaHallMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CinemaHallMapperImpl implements CinemaHallMapper {
     @Override
     public CinemaHallResponseDto mapToDto(CinemaHall cinemaHall) {
