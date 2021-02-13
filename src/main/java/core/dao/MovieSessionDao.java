@@ -10,4 +10,8 @@ public interface MovieSessionDao {
     MovieSession get(Long id);
     
     MovieSession add(MovieSession session);
+    
+    void update(MovieSession movieSession);
+    
+    void delete(MovieSession movieSession);
 }

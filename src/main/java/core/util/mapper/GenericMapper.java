@@ -8,5 +8,5 @@ public interface GenericMapper<R, U, E> {
      */
     R mapToDto(E entity);
     
-    E mapFromDto(U requestDto);
+    E mapToEntity(U requestDto);
 }

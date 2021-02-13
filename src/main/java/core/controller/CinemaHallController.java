@@ -43,6 +43,6 @@ public class CinemaHallController {
     
     @PostMapping
     public void addCinemaHall(@RequestBody CinemaHallRequestDto cinemaHallRequestDto) {
-        cinemaHallService.add(cinemaHallMapper.mapFromDto(cinemaHallRequestDto));
+        cinemaHallService.add(cinemaHallMapper.mapToEntity(cinemaHallRequestDto));
     }
 }

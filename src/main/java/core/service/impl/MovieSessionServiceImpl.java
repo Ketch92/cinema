@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieSessionServiceImpl implements MovieSessionService {
-    private MovieSessionDao movieSessionDao;
+    private final MovieSessionDao movieSessionDao;
     
     public MovieSessionServiceImpl(MovieSessionDao movieSessionDao) {
         this.movieSessionDao = movieSessionDao;
@@ -23,6 +23,16 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     @Override
     public MovieSession get(Long id) {
         return movieSessionDao.get(id);
+    }
+    
+    @Override
+    public void update(MovieSession movieSession) {
+        movieSessionDao.update(movieSession);
+    }
+    
+    @Override
+    public void delete(MovieSession movieSession) {
+    
     }
     
     @Override

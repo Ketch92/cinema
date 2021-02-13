@@ -7,7 +7,7 @@ public class MovieSessionResponseDto {
     private String movieTitle;
     private int cinemaHallCapacity;
     private String cinemaHallDescription;
-    private LocalDateTime showTime;
+    private String showTime;
     
     public MovieSessionResponseDto() {
     }
@@ -21,7 +21,7 @@ public class MovieSessionResponseDto {
         this.movieTitle = movieTitle;
         this.cinemaHallCapacity = cinemaHallCapacity;
         this.cinemaHallDescription = cinemaHallDescription;
-        this.showTime = showTime;
+        this.showTime = showTime.toString();
     }
     
     public Long getId() {
@@ -56,12 +56,12 @@ public class MovieSessionResponseDto {
         this.cinemaHallDescription = cinemaHallDescription;
     }
     
-    public LocalDateTime getShowTime() {
+    public String getShowTime() {
         return showTime;
     }
     
     public void setShowTime(LocalDateTime showTime) {
-        this.showTime = showTime;
+        this.showTime = showTime.toString();
     }
     
     @Override

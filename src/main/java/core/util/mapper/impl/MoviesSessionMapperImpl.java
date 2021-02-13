@@ -8,12 +8,13 @@ import core.model.dto.MovieSessionResponseDto;
 import core.service.CinemaHallService;
 import core.service.MovieService;
 import core.util.mapper.MovieSessionMapper;
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MoviesSessionMapperImpl implements MovieSessionMapper {
-    private MovieService movieService;
-    private CinemaHallService cinemaHallService;
+    private final MovieService movieService;
+    private final CinemaHallService cinemaHallService;
     
     public MoviesSessionMapperImpl(MovieService movieService,
                                    CinemaHallService cinemaHallService) {
@@ -31,12 +32,13 @@ public class MoviesSessionMapperImpl implements MovieSessionMapper {
     }
     
     @Override
-    public MovieSession mapFromDto(MovieSessionRequestDto movieSessionRequestDto) {
+    public MovieSession mapToEntity(MovieSessionRequestDto movieSessionRequestDto) {
         Movie movie = movieService.get(movieSessionRequestDto.getMovieId());
         CinemaHall cinemaHall = cinemaHallService.get(movieSessionRequestDto.getCinemaHallId());
         MovieSession movieSession = new MovieSession(movie,
                 cinemaHall,
-                movieSessionRequestDto.getShowTime());
+                LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
+        movieSession.setId(movieSessionRequestDto.getSessionId());
         return movieSession;
     }
 }

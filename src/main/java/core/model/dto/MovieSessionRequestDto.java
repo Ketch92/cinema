@@ -1,21 +1,30 @@
 package core.model.dto;
 
-import java.time.LocalDateTime;
-
 public class MovieSessionRequestDto {
+    private Long sessionId;
     private Long movieId;
     private Long cinemaHallId;
-    private LocalDateTime showTime;
+    private String showTime;
     
     public MovieSessionRequestDto() {
     }
     
-    public MovieSessionRequestDto(Long movieId,
+    public MovieSessionRequestDto(Long sessionId,
+                                  Long movieId,
                                   Long cinemaHallId,
-                                  LocalDateTime showTime) {
+                                  String showTime) {
+        this.sessionId = sessionId;
         this.movieId = movieId;
         this.cinemaHallId = cinemaHallId;
         this.showTime = showTime;
+    }
+    
+    public Long getSessionId() {
+        return sessionId;
+    }
+    
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
     }
     
     public Long getMovieId() {
@@ -34,11 +43,11 @@ public class MovieSessionRequestDto {
         this.cinemaHallId = cinemaHallId;
     }
     
-    public LocalDateTime getShowTime() {
+    public String getShowTime() {
         return showTime;
     }
     
-    public void setShowTime(LocalDateTime showTime) {
+    public void setShowTime(String showTime) {
         this.showTime = showTime;
     }
     

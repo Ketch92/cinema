@@ -16,7 +16,7 @@ public class CinemaHallMapperImpl implements CinemaHallMapper {
     }
     
     @Override
-    public CinemaHall mapFromDto(CinemaHallRequestDto cinemaHallRequestDto) {
+    public CinemaHall mapToEntity(CinemaHallRequestDto cinemaHallRequestDto) {
         return new CinemaHall(cinemaHallRequestDto.getCapacity(),
                 cinemaHallRequestDto.getDescription());
     }

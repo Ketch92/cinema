@@ -1,5 +1,6 @@
 package core.dao.impl;
 
+import core.model.exception.DataProcessingException;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -70,6 +71,25 @@ public abstract class AbstractDao<T> {
             }
             throw new RuntimeException("Errored while deleting data "
                                        + entity + " from DB");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    
+    public void update(T entity) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(entity);
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Couldn't update the " + entity, e);
         } finally {
             if (session != null) {
                 session.close();

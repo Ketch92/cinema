@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieMapperImpl implements MovieMapper {
-    
     @Override
     public MovieResponseDto mapToDto(Movie movie) {
         return new MovieResponseDto(movie.getId(),
@@ -17,7 +16,7 @@ public class MovieMapperImpl implements MovieMapper {
     }
     
     @Override
-    public Movie mapFromDto(MovieRequestDto movieRequestDto) {
+    public Movie mapToEntity(MovieRequestDto movieRequestDto) {
         return new Movie(movieRequestDto.getTitle(),
                 movieRequestDto.getDescription());
     }
