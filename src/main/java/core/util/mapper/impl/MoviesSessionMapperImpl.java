@@ -39,7 +39,6 @@ public class MoviesSessionMapperImpl implements MovieSessionMapper {
         CinemaHall cinemaHall = cinemaHallService.get(movieSessionRequestDto.getCinemaHallId());
         MovieSession movieSession = new MovieSession(movie, cinemaHall,
                 LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
-        movieSession.setId(movieSessionRequestDto.getSessionId());
         return movieSession;
     }
 }
