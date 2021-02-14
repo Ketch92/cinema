@@ -3,6 +3,7 @@ package core.dao.impl;
 import core.dao.MovieDao;
 import core.model.Movie;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,7 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     }
     
     @Override
-    public Movie get(Long id) {
+    public Optional<Movie> get(Long id) {
         return super.get(Movie.class, id);
     }
     

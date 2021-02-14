@@ -6,6 +6,7 @@ import core.model.exception.DataProcessingException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
@@ -49,7 +50,7 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
     }
     
     @Override
-    public MovieSession get(Long id) {
+    public Optional<MovieSession> get(Long id) {
         return super.get(MovieSession.class, id);
     }
     

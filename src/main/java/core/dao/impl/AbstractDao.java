@@ -2,6 +2,7 @@ package core.dao.impl;
 
 import core.model.exception.DataProcessingException;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -39,9 +40,9 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public T get(Class<T> clazz, Long id) {
+    public Optional<T> get(Class<T> clazz, Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.get(clazz, id);
+            return Optional.ofNullable(session.get(clazz, id));
         } catch (Exception e) {
             throw new RuntimeException("Errored while retrieving data by id "
                                        + id + " from DB", e);

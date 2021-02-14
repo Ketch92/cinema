@@ -2,11 +2,12 @@ package core.dao;
 
 import core.model.Movie;
 import java.util.List;
+import java.util.Optional;
 
 public interface MovieDao {
     Movie add(Movie movie);
     
-    Movie get(Long id);
+    Optional<Movie> get(Long id);
     
     List<Movie> getAll();
 }
