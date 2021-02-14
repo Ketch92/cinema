@@ -4,14 +4,6 @@ public class MovieRequestDto {
     private String title;
     private String description;
     
-    public MovieRequestDto() {
-    }
-    
-    public MovieRequestDto(Long id, String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-    
     @Override
     public String toString() {
         return "MovieResponseDto{"

@@ -1,6 +1,5 @@
 package core.controller;
 
-import core.model.CinemaHall;
 import core.model.dto.CinemaHallRequestDto;
 import core.model.dto.CinemaHallResponseDto;
 import core.service.CinemaHallService;
@@ -28,9 +27,6 @@ public class CinemaHallController {
     
     @GetMapping
     public List<CinemaHallResponseDto> getCinemaHalls() {
-        cinemaHallService.add(new CinemaHall(10, "some"));
-        cinemaHallService.add(new CinemaHall(10, "some"));
-        cinemaHallService.add(new CinemaHall(10, "some"));
         return cinemaHallService.getAll().stream()
                 .map(cinemaHallMapper::mapToDto)
                 .collect(Collectors.toList());

@@ -6,19 +6,6 @@ public class MovieSessionRequestDto {
     private Long cinemaHallId;
     private String showTime;
     
-    public MovieSessionRequestDto() {
-    }
-    
-    public MovieSessionRequestDto(Long sessionId,
-                                  Long movieId,
-                                  Long cinemaHallId,
-                                  String showTime) {
-        this.sessionId = sessionId;
-        this.movieId = movieId;
-        this.cinemaHallId = cinemaHallId;
-        this.showTime = showTime;
-    }
-    
     public Long getSessionId() {
         return sessionId;
     }

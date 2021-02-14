@@ -9,21 +9,6 @@ public class MovieSessionResponseDto {
     private String cinemaHallDescription;
     private String showTime;
     
-    public MovieSessionResponseDto() {
-    }
-    
-    public MovieSessionResponseDto(Long id,
-                                   String movieTitle,
-                                   int cinemaHallCapacity,
-                                   String cinemaHallDescription,
-                                   LocalDateTime showTime) {
-        this.id = id;
-        this.movieTitle = movieTitle;
-        this.cinemaHallCapacity = cinemaHallCapacity;
-        this.cinemaHallDescription = cinemaHallDescription;
-        this.showTime = showTime.toString();
-    }
-    
     public Long getId() {
         return id;
     }

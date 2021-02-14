@@ -24,19 +24,20 @@ public class MoviesSessionMapperImpl implements MovieSessionMapper {
     
     @Override
     public MovieSessionResponseDto mapToDto(MovieSession movieSession) {
-        return new MovieSessionResponseDto(movieSession.getId(),
-                movieSession.getMovie().getTitle(),
-                movieSession.getCinemaHall().getCapacity(),
-                movieSession.getCinemaHall().getDescription(),
-                movieSession.getShowTime());
+        MovieSessionResponseDto msrDto = new MovieSessionResponseDto();
+        msrDto.setId(movieSession.getId());
+        msrDto.setMovieTitle(movieSession.getMovie().getTitle());
+        msrDto.setCinemaHallCapacity(movieSession.getCinemaHall().getCapacity());
+        msrDto.setCinemaHallDescription(movieSession.getCinemaHall().getDescription());
+        msrDto.setShowTime(movieSession.getShowTime());
+        return msrDto;
     }
     
     @Override
     public MovieSession mapToEntity(MovieSessionRequestDto movieSessionRequestDto) {
         Movie movie = movieService.get(movieSessionRequestDto.getMovieId());
         CinemaHall cinemaHall = cinemaHallService.get(movieSessionRequestDto.getCinemaHallId());
-        MovieSession movieSession = new MovieSession(movie,
-                cinemaHall,
+        MovieSession movieSession = new MovieSession(movie, cinemaHall,
                 LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
         movieSession.setId(movieSessionRequestDto.getSessionId());
         return movieSession;
