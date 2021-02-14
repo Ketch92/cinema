@@ -1,5 +1,6 @@
 package core.controller;
 
+import core.model.MovieSession;
 import core.model.dto.MovieSessionRequestDto;
 import core.model.dto.MovieSessionResponseDto;
 import core.service.MovieSessionService;
@@ -50,13 +51,17 @@ public class MovieSessionController {
         movieSessionService.add(movieSessionMapper.mapToEntity(movieSessionRequestDto));
     }
     
-    @PutMapping
-    public void updateMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
-        movieSessionService.update(movieSessionMapper.mapToEntity(movieSessionRequestDto));
+    @PutMapping("/{id}")
+    public void updateMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto,
+                                   @PathVariable Long id) {
+        MovieSession movieSession = movieSessionMapper.mapToEntity(movieSessionRequestDto);
+        movieSession.setId(id);
+        movieSessionService.update(movieSession);
     }
     
-    @DeleteMapping
-    public void deleteMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
-        movieSessionService.delete(movieSessionMapper.mapToEntity(movieSessionRequestDto));
+    @DeleteMapping("/{id}")
+    public void deleteMovieSession(@PathVariable Long id) {
+        MovieSession movieSession = movieSessionService.get(id);
+        movieSessionService.delete(movieSession);
     }
 }

@@ -86,6 +86,7 @@ public abstract class AbstractDao<T> {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.update(entity);
+            transaction.commit();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
