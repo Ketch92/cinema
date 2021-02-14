@@ -13,8 +13,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private static final String AUTHENTICATION_ERROR_MESSAGE
             = "User with given email and/or password wasn't found";
     
-    private UserService userService;
-    private ShoppingCartService shoppingCartService;
+    private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
     
     public AuthenticationServiceImpl(UserService userService,
                                      ShoppingCartService shoppingCartService) {

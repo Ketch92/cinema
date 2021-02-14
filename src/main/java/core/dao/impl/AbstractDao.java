@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public abstract class AbstractDao<T> {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     
     public AbstractDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
