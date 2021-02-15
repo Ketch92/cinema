@@ -58,20 +58,24 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public void remove(T entity) {
+    public void delete(Long id, Class<T> clazz) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.delete(entity);
+            Query query = session.createQuery("delete from "
+                                              + clazz.getSimpleName()
+                                              + " c where c.id = :id");
+            query.setParameter("id", id);
+            query.executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new RuntimeException("Errored while deleting data "
-                                       + entity + " from DB");
+                                       + clazz.getSimpleName() + " from DB");
         } finally {
             if (session != null) {
                 session.close();

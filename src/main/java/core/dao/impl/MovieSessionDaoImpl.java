@@ -65,7 +65,7 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
     }
     
     @Override
-    public void delete(MovieSession movieSession) {
-        super.delete(movieSession);
+    public void delete(Long id) {
+        super.delete(id, MovieSession.class);
     }
 }

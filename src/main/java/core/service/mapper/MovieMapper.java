@@ -1,4 +1,4 @@
-package core.util.mapper;
+package core.service.mapper;
 
 import core.model.Movie;
 import core.model.dto.MovieRequestDto;

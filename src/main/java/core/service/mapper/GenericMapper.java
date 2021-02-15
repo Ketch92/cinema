@@ -1,4 +1,4 @@
-package core.util.mapper;
+package core.service.mapper;
 
 public interface GenericMapper<R, U, E> {
     /**

@@ -4,7 +4,7 @@ import core.model.MovieSession;
 import core.model.dto.MovieSessionRequestDto;
 import core.model.dto.MovieSessionResponseDto;
 import core.service.MovieSessionService;
-import core.util.mapper.MovieSessionMapper;
+import core.service.mapper.MovieSessionMapper;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class MovieSessionController {
     }
     
     @GetMapping("/available")
-    public List<MovieSessionResponseDto> getAvailable(@RequestParam(name = "movie-id") Long movieId,
+    public List<MovieSessionResponseDto> getAvailable(@RequestParam Long movieId,
                                                       @RequestParam
                                                       @DateTimeFormat(pattern = "dd.MM.yyyy")
                                                               LocalDate date) {
@@ -47,8 +47,8 @@ public class MovieSessionController {
     }
     
     @PostMapping
-    public void addMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
-        movieSessionService.add(movieSessionMapper.mapToEntity(movieSessionRequestDto));
+    public void addMovieSession(@RequestBody MovieSessionRequestDto requestDto) {
+        movieSessionService.add(movieSessionMapper.mapToEntity(requestDto));
     }
     
     @PutMapping("/{id}")
@@ -61,7 +61,6 @@ public class MovieSessionController {
     
     @DeleteMapping("/{id}")
     public void deleteMovieSession(@PathVariable Long id) {
-        MovieSession movieSession = movieSessionService.get(id);
-        movieSessionService.delete(movieSession);
+        movieSessionService.delete(id);
     }
 }

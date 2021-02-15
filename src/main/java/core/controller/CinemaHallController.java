@@ -3,7 +3,7 @@ package core.controller;
 import core.model.dto.CinemaHallRequestDto;
 import core.model.dto.CinemaHallResponseDto;
 import core.service.CinemaHallService;
-import core.util.mapper.CinemaHallMapper;
+import core.service.mapper.CinemaHallMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +38,7 @@ public class CinemaHallController {
     }
     
     @PostMapping
-    public void addCinemaHall(@RequestBody CinemaHallRequestDto cinemaHallRequestDto) {
-        cinemaHallService.add(cinemaHallMapper.mapToEntity(cinemaHallRequestDto));
+    public void addCinemaHall(@RequestBody CinemaHallRequestDto requestDto) {
+        cinemaHallService.add(cinemaHallMapper.mapToEntity(requestDto));
     }
 }

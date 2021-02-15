@@ -3,7 +3,7 @@ package core.controller;
 import core.model.dto.MovieRequestDto;
 import core.model.dto.MovieResponseDto;
 import core.service.MovieService;
-import core.util.mapper.MovieMapper;
+import core.service.mapper.MovieMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +37,7 @@ public class MovieController {
     }
     
     @PostMapping
-    public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
-        movieService.add(movieMapper.mapToEntity(movieRequestDto));
+    public void addMovie(@RequestBody MovieRequestDto requestDto) {
+        movieService.add(movieMapper.mapToEntity(requestDto));
     }
 }
