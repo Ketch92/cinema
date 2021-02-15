@@ -45,8 +45,8 @@ public class MovieSessionResponseDto {
         return showTime;
     }
     
-    public void setShowTime(LocalDateTime showTime) {
-        this.showTime = showTime.toString();
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
     }
     
     @Override

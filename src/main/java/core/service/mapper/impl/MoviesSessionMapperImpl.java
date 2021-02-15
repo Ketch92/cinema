@@ -29,7 +29,7 @@ public class MoviesSessionMapperImpl implements MovieSessionMapper {
         responseDto.setMovieTitle(movieSession.getMovie().getTitle());
         responseDto.setCinemaHallCapacity(movieSession.getCinemaHall().getCapacity());
         responseDto.setCinemaHallDescription(movieSession.getCinemaHall().getDescription());
-        responseDto.setShowTime(movieSession.getShowTime());
+        responseDto.setShowTime(movieSession.getShowTime().toString());
         return responseDto;
     }
     
