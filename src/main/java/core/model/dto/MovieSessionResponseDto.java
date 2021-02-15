@@ -1,7 +1,5 @@
 package core.model.dto;
 
-import java.time.LocalDateTime;
-
 public class MovieSessionResponseDto {
     private Long id;
     private String movieTitle;
