@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CinemaHallServiceImpl implements CinemaHallService {
-    private CinemaHallDao cinemaHallDao;
+    private final CinemaHallDao cinemaHallDao;
     
     public CinemaHallServiceImpl(CinemaHallDao cinemaHallDao) {
         this.cinemaHallDao = cinemaHallDao;
@@ -17,6 +17,11 @@ public class CinemaHallServiceImpl implements CinemaHallService {
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
         return cinemaHallDao.add(cinemaHall);
+    }
+    
+    @Override
+    public CinemaHall get(Long id) {
+        return cinemaHallDao.get(id).orElseThrow();
     }
     
     @Override

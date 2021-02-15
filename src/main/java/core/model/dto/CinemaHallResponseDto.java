@@ -1,27 +1,9 @@
-package core.model;
+package core.model.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "cinema_hall")
-public class CinemaHall {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CinemaHallResponseDto {
     private Long id;
     private int capacity;
     private String description;
-    
-    public CinemaHall() {
-    }
-    
-    public CinemaHall(int capacity, String description) {
-        this.capacity = capacity;
-        this.description = description;
-    }
     
     public Long getId() {
         return id;
@@ -49,7 +31,7 @@ public class CinemaHall {
     
     @Override
     public String toString() {
-        return "CinemaHall{"
+        return "CinemaHallResponseDto{"
                + "id=" + id
                + ", capacity=" + capacity
                + ", description='" + description + '\''

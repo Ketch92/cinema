@@ -1,13 +1,15 @@
 package core.dao.impl;
 
+import core.model.exception.DataProcessingException;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public abstract class AbstractDao<T> {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     
     public AbstractDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -38,9 +40,9 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public T get(Class<T> clazz, Long id) {
+    public Optional<T> get(Class<T> clazz, Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.get(clazz, id);
+            return Optional.ofNullable(session.get(clazz, id));
         } catch (Exception e) {
             throw new RuntimeException("Errored while retrieving data by id "
                                        + id + " from DB", e);
@@ -56,20 +58,44 @@ public abstract class AbstractDao<T> {
         }
     }
     
-    public void remove(T entity) {
+    public void delete(Long id, Class<T> clazz) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.delete(entity);
+            Query query = session.createQuery("delete from "
+                                              + clazz.getSimpleName()
+                                              + " c where c.id = :id");
+            query.setParameter("id", id);
+            query.executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new RuntimeException("Errored while deleting data "
-                                       + entity + " from DB");
+                                       + clazz.getSimpleName() + " from DB");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    
+    public void update(T entity) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Couldn't update the " + entity, e);
         } finally {
             if (session != null) {
                 session.close();
