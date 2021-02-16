@@ -42,7 +42,21 @@ public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements Sh
     
     @Override
     public Optional<ShoppingCart> get(Long id) {
-        return super.get(ShoppingCart.class, id);
+        try (Session session = getSessionFactory().openSession()) {
+            Query<ShoppingCart> query = session
+                    .createQuery("from ShoppingCart sc "
+                                 + " left join fetch sc.ticketList tl"
+                                 + " left join fetch tl.movieSession ms"
+                                 + " left join fetch ms.movie"
+                                 + " left join fetch ms.cinemaHall"
+                                 + " left join fetch sc.user u"
+                                 + " where u.id = :id", ShoppingCart.class);
+            query.setParameter("id", id);
+            return query.uniqueResultOptional();
+        } catch (Exception e) {
+            throw new DataProcessingException("An error has occurred while"
+                                              + " retrieving the data for id " + id);
+        }
     }
     
     @Override
