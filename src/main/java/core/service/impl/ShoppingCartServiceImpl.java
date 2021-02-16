@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private static final String errorMessage = "Error has occurred while retrieving the data from DB";
+    private static final String errorMessage
+            = "Error has occurred while retrieving the data from DB";
     private final ShoppingCartDao shoppingCartDao;
     private final TicketDao ticketDao;
     
