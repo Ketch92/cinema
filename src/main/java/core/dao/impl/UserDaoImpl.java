@@ -21,6 +21,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
     
     @Override
+    public Optional<User> get(Long id) {
+        return super.get(User.class, id);
+    }
+    
+    @Override
     public Optional<User> findByEmail(String email) {
         try (Session session = getSessionFactory().openSession()) {
             Query<User> query = session.createQuery("from User where email = :email",

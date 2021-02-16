@@ -4,6 +4,7 @@ import core.dao.ShoppingCartDao;
 import core.model.ShoppingCart;
 import core.model.User;
 import core.model.exception.DataProcessingException;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,6 +38,11 @@ public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart> implements Sh
             throw new DataProcessingException("An error has occurred while retrieving the data for "
                                               + user);
         }
+    }
+    
+    @Override
+    public Optional<ShoppingCart> get(Long id) {
+        return super.get(ShoppingCart.class, id);
     }
     
     @Override

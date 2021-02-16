@@ -3,11 +3,10 @@ package core.service.mapper.impl;
 import core.model.User;
 import core.model.dto.UserResponseDto;
 import core.service.mapper.ToDtoMapper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserMapper implements ToDtoMapper<UserResponseDto, User> {
-    
     @Override
     public UserResponseDto mapToDto(User user) {
         UserResponseDto responseDto = new UserResponseDto();
