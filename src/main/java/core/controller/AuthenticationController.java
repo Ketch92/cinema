@@ -4,10 +4,8 @@ import core.model.dto.UserRequestDto;
 import core.security.AuthenticationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/register")
 @RestController
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
@@ -16,7 +14,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
     
-    @PostMapping
+    @PostMapping("/register")
     public String registerUser(@RequestBody UserRequestDto requestDto) {
         try {
             authenticationService.register(requestDto.getEmail(), requestDto.getPassword());

@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/orders")
 @RestController
 public class OrderController {
     private final OrderService orderService;
@@ -32,7 +30,7 @@ public class OrderController {
         this.orderToDtoMapper = orderToDtoMapper;
     }
     
-    @GetMapping
+    @GetMapping("/orders")
     public List<OrderResponseDto> getUserOrders(@RequestParam Long userId) {
         return orderService.getOrdersHistory(userService.get(userId)).stream()
                 .map(orderToDtoMapper::mapToDto)
