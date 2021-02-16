@@ -6,11 +6,13 @@ import core.model.MovieSession;
 import core.model.ShoppingCart;
 import core.model.Ticket;
 import core.model.User;
+import core.model.exception.DataProcessingException;
 import core.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
+    private static final String errorMessage = "Error has occurred while retrieving the data from DB";
     private final ShoppingCartDao shoppingCartDao;
     private final TicketDao ticketDao;
     
@@ -44,7 +46,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     
     @Override
     public ShoppingCart get(Long id) {
-        return shoppingCartDao.get(id).orElseThrow();
+        return shoppingCartDao.get(id)
+                .orElseThrow(() -> new DataProcessingException(errorMessage));
     }
     
     @Override

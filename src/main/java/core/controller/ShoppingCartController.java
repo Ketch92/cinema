@@ -1,10 +1,13 @@
 package core.controller;
 
 import core.model.MovieSession;
+import core.model.ShoppingCart;
 import core.model.User;
+import core.model.dto.ShoppingCartResponseDto;
 import core.service.MovieSessionService;
 import core.service.ShoppingCartService;
 import core.service.UserService;
+import core.service.mapper.ToDtoMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,18 +20,21 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final UserService userService;
     private final MovieSessionService movieSessionService;
+    private final ToDtoMapper<ShoppingCartResponseDto, ShoppingCart> cartToDtoMapper;
     
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
-                                  MovieSessionService movieSessionService) {
+                                  MovieSessionService movieSessionService,
+                                  ToDtoMapper<ShoppingCartResponseDto, ShoppingCart> cartToDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionService = movieSessionService;
+        this.cartToDtoMapper = cartToDtoMapper;
     }
     
     @GetMapping("/by-user")
-    public void getShoppingCartsByUser(@RequestParam Long userId) {
-        shoppingCartService.get(userId);
+    public ShoppingCartResponseDto getShoppingCartsByUser(@RequestParam Long userId) {
+        return cartToDtoMapper.mapToDto(shoppingCartService.get(userId));
     }
     
     @PostMapping("/movie-sessions")

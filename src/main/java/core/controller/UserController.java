@@ -2,10 +2,9 @@ package core.controller;
 
 import core.model.User;
 import core.model.dto.UserResponseDto;
+import core.model.exception.DataProcessingException;
 import core.service.UserService;
 import core.service.mapper.ToDtoMapper;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +23,8 @@ public class UserController {
     }
     
     @GetMapping("/by-email")
-    public List<UserResponseDto> getUserByEmail(@RequestParam String email) {
-        return userService.findByEmail(email).stream()
-                .map(toDtoMapper::mapToDto)
-                .collect(Collectors.toList());
+    public UserResponseDto getUserByEmail(@RequestParam String email) {
+        return toDtoMapper.mapToDto(userService.findByEmail(email)
+                .orElseThrow(() -> new DataProcessingException("No user with such email!")));
     }
 }

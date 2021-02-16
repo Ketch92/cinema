@@ -8,9 +8,6 @@ public class OrderResponseDto {
     private Long userId;
     private String orderDate;
     
-    public OrderResponseDto() {
-    }
-    
     public Long getOrderId() {
         return orderId;
     }
