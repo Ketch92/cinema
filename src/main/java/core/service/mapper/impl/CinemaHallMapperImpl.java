@@ -3,11 +3,14 @@ package core.service.mapper.impl;
 import core.model.CinemaHall;
 import core.model.dto.CinemaHallRequestDto;
 import core.model.dto.CinemaHallResponseDto;
-import core.service.mapper.CinemaHallMapper;
+import core.service.mapper.ToDtoMapper;
+import core.service.mapper.ToEntityMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CinemaHallMapperImpl implements CinemaHallMapper {
+public class CinemaHallMapperImpl
+        implements ToDtoMapper<CinemaHallResponseDto, CinemaHall>,
+        ToEntityMapper<CinemaHall, CinemaHallRequestDto> {
     @Override
     public CinemaHallResponseDto mapToDto(CinemaHall cinemaHall) {
         CinemaHallResponseDto responseDto = new CinemaHallResponseDto();

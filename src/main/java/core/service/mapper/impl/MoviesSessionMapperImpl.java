@@ -7,12 +7,15 @@ import core.model.dto.MovieSessionRequestDto;
 import core.model.dto.MovieSessionResponseDto;
 import core.service.CinemaHallService;
 import core.service.MovieService;
-import core.service.mapper.MovieSessionMapper;
+import core.service.mapper.ToDtoMapper;
+import core.service.mapper.ToEntityMapper;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MoviesSessionMapperImpl implements MovieSessionMapper {
+public class MoviesSessionMapperImpl
+        implements ToDtoMapper<MovieSessionResponseDto, MovieSession>,
+        ToEntityMapper<MovieSession, MovieSessionRequestDto> {
     private final MovieService movieService;
     private final CinemaHallService cinemaHallService;
     
