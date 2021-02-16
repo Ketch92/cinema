@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private static final String errorMessage
+    private static final String ERROR_MESSAGE
             = "Error has occurred while retrieving the data from DB";
     private final ShoppingCartDao shoppingCartDao;
     private final TicketDao ticketDao;
@@ -48,7 +48,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart get(Long id) {
         return shoppingCartDao.get(id)
-                .orElseThrow(() -> new DataProcessingException(errorMessage));
+                .orElseThrow(() -> new DataProcessingException(ERROR_MESSAGE));
     }
     
     @Override

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    public static final String errorMessage = "Error has occurred while retrieving the data";
+    public static final String ERROR_MESSAGE = "Error has occurred while retrieving the data";
     private final UserDao userDao;
     
     public UserServiceImpl(UserDao userDao) {
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Long id) {
         return userDao.get(id)
-                .orElseThrow(() -> new DataProcessingException(errorMessage));
+                .orElseThrow(() -> new DataProcessingException(ERROR_MESSAGE));
     }
     
     @Override
