@@ -24,7 +24,8 @@ public class TicketMapper implements ToDtoMapper<TicketResponseDto, Ticket> {
     public TicketResponseDto mapToDto(Ticket ticket) {
         TicketResponseDto responseDto = new TicketResponseDto();
         responseDto.setTicketId(ticket.getId());
-        responseDto.setSessionResponseDto(movieSessionToDtoMapper.mapToDto(ticket.getMovieSession()));
+        responseDto.setSessionResponseDto(movieSessionToDtoMapper
+                .mapToDto(ticket.getMovieSession()));
         responseDto.setUserResponseDto(userToDtoMapper.mapToDto(ticket.getUser()));
         return responseDto;
     }

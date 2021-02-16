@@ -21,8 +21,8 @@ public class AuthenticationController {
         try {
             authenticationService.register(requestDto.getEmail(), requestDto.getPassword());
         } catch (Exception e) {
-            return  "The user with specified email already exists. "
-                    + "Choose another email and try again!";
+            return "The user with specified email already exists. "
+                   + "Choose another email and try again!";
         }
         return "User " + requestDto.getEmail() + " was successfully registered";
     }

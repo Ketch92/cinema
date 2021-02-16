@@ -27,7 +27,10 @@ public class MovieSessionController {
     private final ToDtoMapper<MovieSessionResponseDto, MovieSession> toDtoMapper;
     private final ToEntityMapper<MovieSession, MovieSessionRequestDto> mapToEntity;
     
-    public MovieSessionController(MovieSessionService movieSessionService, ToDtoMapper<MovieSessionResponseDto, MovieSession> toDtoMapper, ToEntityMapper<MovieSession, MovieSessionRequestDto> mapToEntity) {
+    public MovieSessionController(MovieSessionService movieSessionService,
+                                  ToDtoMapper<MovieSessionResponseDto, MovieSession> toDtoMapper,
+                                  ToEntityMapper<MovieSession,
+                                          MovieSessionRequestDto> mapToEntity) {
         this.movieSessionService = movieSessionService;
         this.toDtoMapper = toDtoMapper;
         this.mapToEntity = mapToEntity;
