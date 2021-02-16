@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MoviesSessionMapperImpl
+public class MoviesSessionMapper
         implements ToDtoMapper<MovieSessionResponseDto, MovieSession>,
         ToEntityMapper<MovieSession, MovieSessionRequestDto> {
     private final MovieService movieService;
     private final CinemaHallService cinemaHallService;
     
-    public MoviesSessionMapperImpl(MovieService movieService,
-                                   CinemaHallService cinemaHallService) {
+    public MoviesSessionMapper(MovieService movieService,
+                               CinemaHallService cinemaHallService) {
         this.movieService = movieService;
         this.cinemaHallService = cinemaHallService;
     }

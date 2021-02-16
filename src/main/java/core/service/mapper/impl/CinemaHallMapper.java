@@ -8,7 +8,7 @@ import core.service.mapper.ToEntityMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CinemaHallMapperImpl
+public class CinemaHallMapper
         implements ToDtoMapper<CinemaHallResponseDto, CinemaHall>,
         ToEntityMapper<CinemaHall, CinemaHallRequestDto> {
     @Override
