@@ -1,6 +1,7 @@
 package core.controller;
 
 import core.model.dto.UserRequestDto;
+import core.model.exception.UserRegistrationException;
 import core.security.AuthenticationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +16,8 @@ public class AuthenticationController {
     }
     
     @PostMapping("/register")
-    public String registerUser(@RequestBody UserRequestDto requestDto) {
-        try {
-            authenticationService.register(requestDto.getEmail(), requestDto.getPassword());
-        } catch (Exception e) {
-            return "The user with specified email already exists. "
-                   + "Choose another email and try again!";
-        }
-        return "User " + requestDto.getEmail() + " was successfully registered";
+    public void registerUser(@RequestBody UserRequestDto requestDto)
+            throws UserRegistrationException {
+        authenticationService.register(requestDto.getEmail(), requestDto.getPassword());
     }
 }

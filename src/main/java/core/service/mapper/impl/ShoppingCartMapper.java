@@ -17,7 +17,7 @@ public class ShoppingCartMapper implements ToDtoMapper<ShoppingCartResponseDto, 
         List<Long> tickets = shoppingCart.getTicketList().stream()
                 .map(Ticket::getId)
                 .collect(Collectors.toList());
-        responseDto.setTickets(tickets);
+        responseDto.setTicketIds(tickets);
         return responseDto;
     }
 }
