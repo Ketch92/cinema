@@ -1,9 +1,11 @@
 package core.controller;
 
+import core.model.CinemaHall;
 import core.model.dto.CinemaHallRequestDto;
 import core.model.dto.CinemaHallResponseDto;
 import core.service.CinemaHallService;
-import core.service.mapper.CinemaHallMapper;
+import core.service.mapper.ToDtoMapper;
+import core.service.mapper.ToEntityMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,28 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CinemaHallController {
     private final CinemaHallService cinemaHallService;
-    private final CinemaHallMapper cinemaHallMapper;
+    private final ToDtoMapper<CinemaHallResponseDto, CinemaHall> mapToDto;
+    private final ToEntityMapper<CinemaHall, CinemaHallRequestDto> mapToEntity;
     
     public CinemaHallController(CinemaHallService cinemaHallService,
-                                CinemaHallMapper cinemaHallMapper) {
+                                ToDtoMapper<CinemaHallResponseDto, CinemaHall> mapToDto,
+                                ToEntityMapper<CinemaHall, CinemaHallRequestDto> mapToEntity) {
         this.cinemaHallService = cinemaHallService;
-        this.cinemaHallMapper = cinemaHallMapper;
+        this.mapToDto = mapToDto;
+        this.mapToEntity = mapToEntity;
     }
     
     @GetMapping
     public List<CinemaHallResponseDto> getCinemaHalls() {
         return cinemaHallService.getAll().stream()
-                .map(cinemaHallMapper::mapToDto)
+                .map(mapToDto::mapToDto)
                 .collect(Collectors.toList());
     }
     
     @GetMapping("/{id}")
     public CinemaHallResponseDto getCinemaHall(@PathVariable Long id) {
-        return cinemaHallMapper.mapToDto(cinemaHallService.get(id));
+        return mapToDto.mapToDto(cinemaHallService.get(id));
     }
     
     @PostMapping
     public void addCinemaHall(@RequestBody CinemaHallRequestDto requestDto) {
-        cinemaHallService.add(cinemaHallMapper.mapToEntity(requestDto));
+        cinemaHallService.add(mapToEntity.mapToEntity(requestDto));
     }
 }

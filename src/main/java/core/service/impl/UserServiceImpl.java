@@ -2,6 +2,7 @@ package core.service.impl;
 
 import core.dao.UserDao;
 import core.model.User;
+import core.model.exception.DataProcessingException;
 import core.service.UserService;
 import core.util.AuthenticationUtil;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+    public static final String ERROR_MESSAGE = "Error has occurred while retrieving the data";
     private final UserDao userDao;
     
     public UserServiceImpl(UserDao userDao) {
@@ -20,6 +22,12 @@ public class UserServiceImpl implements UserService {
         user.setSalt(AuthenticationUtil.getSalt());
         user.setPassword(AuthenticationUtil.hashPassword(user.getPassword(), user.getSalt()));
         return userDao.add(user);
+    }
+    
+    @Override
+    public User get(Long id) {
+        return userDao.get(id)
+                .orElseThrow(() -> new DataProcessingException(ERROR_MESSAGE));
     }
     
     @Override
