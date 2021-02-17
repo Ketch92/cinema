@@ -1,8 +1,18 @@
 package core.model.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class UserRequestDto {
+    @NotNull(message = "Please, don't leave this field empty.")
+    @Min(value = 4)
     private String email;
+    @NotNull(message = "Please, don't leave this field empty.")
+    @Min(value = 4)
     private String password;
+    @NotNull(message = "Please, don't leave this field empty.")
+    @Min(value = 4)
+    private String repeatPassword;
     
     public UserRequestDto() {
     }
@@ -10,6 +20,14 @@ public class UserRequestDto {
     public UserRequestDto(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+    
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+    
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
     
     public String getEmail() {

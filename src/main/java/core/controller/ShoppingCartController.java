@@ -43,7 +43,8 @@ public class ShoppingCartController {
     }
     
     @PostMapping("/movie-sessions")
-    public String addSessionToCart(@RequestParam Long movieSessionId, Authentication authentication) {
+    public String addSessionToCart(@RequestParam Long movieSessionId,
+                                   Authentication authentication) {
         UserDetails details = (UserDetails) authentication.getPrincipal();
         User user = userService.findByEmail(details.getUsername()).get();
         MovieSession movieSession = movieSessionService.get(movieSessionId);

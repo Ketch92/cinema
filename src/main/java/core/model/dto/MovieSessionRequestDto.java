@@ -1,8 +1,13 @@
 package core.model.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class MovieSessionRequestDto {
+    @NotNull(message = "Please, don't leave this field empty.")
     private Long movieId;
+    @NotNull(message = "Please, don't leave this field empty.")
     private Long cinemaHallId;
+    @NotNull(message = "Please, don't leave this field empty.")
     private String showTime;
     
     public Long getMovieId() {

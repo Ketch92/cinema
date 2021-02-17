@@ -9,6 +9,7 @@ import core.service.mapper.ToEntityMapper;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,12 +53,13 @@ public class MovieSessionController {
     }
     
     @PostMapping
-    public void addMovieSession(@RequestBody MovieSessionRequestDto requestDto) {
+    public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto requestDto) {
         movieSessionService.add(mapToEntity.mapToEntity(requestDto));
     }
     
     @PutMapping("/{id}")
-    public void updateMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto,
+    public void updateMovieSession(@RequestBody
+                                   @Valid MovieSessionRequestDto movieSessionRequestDto,
                                    @PathVariable Long id) {
         MovieSession movieSession = mapToEntity.mapToEntity(movieSessionRequestDto);
         movieSession.setId(id);

@@ -1,6 +1,9 @@
 package core.model.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class MovieRequestDto {
+    @NotNull(message = "The title field shouldn't be empty.")
     private String title;
     private String description;
     
