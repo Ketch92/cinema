@@ -13,8 +13,9 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final String AUTHENTICATION_ERROR_MESSAGE
             = "User with given email and/or password wasn't found";
-    private static final String USER_REGISTRATION_EXC_MESSAGE = "User with given email already exists."
-                                                                + " Please, give choose another email and try again.";
+    private static final String USER_REGISTRATION_EXC_MESSAGE
+            = "User with given email already exists."
+              + " Please, give choose another email and try again.";
     
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
