@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
         field = "password",
         fieldMatch = "repeatPassword")
 public class UserRequestDto {
-    @NotNull(message = "Please, don't leave this field empty.")
     @ValidateEmail
     @Size(min = 4)
     private String email;
