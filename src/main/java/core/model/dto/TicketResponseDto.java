@@ -2,8 +2,8 @@ package core.model.dto;
 
 public class TicketResponseDto {
     private Long ticketId;
-    private MovieSessionResponseDto sessionResponseDto;
-    private UserResponseDto userResponseDto;
+    private MovieSessionResponseDto moviesSession;
+    private UserResponseDto user;
     
     public Long getTicketId() {
         return ticketId;
@@ -13,28 +13,28 @@ public class TicketResponseDto {
         this.ticketId = ticketId;
     }
     
-    public MovieSessionResponseDto getSessionResponseDto() {
-        return sessionResponseDto;
+    public MovieSessionResponseDto getMoviesSession() {
+        return moviesSession;
     }
     
-    public void setSessionResponseDto(MovieSessionResponseDto sessionResponseDto) {
-        this.sessionResponseDto = sessionResponseDto;
+    public void setMoviesSession(MovieSessionResponseDto moviesSession) {
+        this.moviesSession = moviesSession;
     }
     
-    public UserResponseDto getUserResponseDto() {
-        return userResponseDto;
+    public UserResponseDto getUser() {
+        return user;
     }
     
-    public void setUserResponseDto(UserResponseDto userResponseDto) {
-        this.userResponseDto = userResponseDto;
+    public void setUser(UserResponseDto user) {
+        this.user = user;
     }
     
     @Override
     public String toString() {
         return "TicketResponseDto{"
                + "ticketId=" + ticketId
-               + ", sessionResponseDto=" + sessionResponseDto
-               + ", userResponseDto=" + userResponseDto
+               + ", sessionResponseDto=" + moviesSession
+               + ", userResponseDto=" + user
                + '}';
     }
 }
