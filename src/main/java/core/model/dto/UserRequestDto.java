@@ -1,17 +1,23 @@
 package core.model.dto;
 
-import javax.validation.constraints.Min;
+import core.lib.ValidateEmail;
+import core.lib.FieldMatch;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+@FieldMatch(message = "Passwords are different.",
+        field = "password",
+        fieldMatch = "repeatPassword")
 public class UserRequestDto {
     @NotNull(message = "Please, don't leave this field empty.")
-    @Min(value = 4)
+    @ValidateEmail
+    @Size(min = 4)
     private String email;
     @NotNull(message = "Please, don't leave this field empty.")
-    @Min(value = 4)
+    @Size(min = 4)
     private String password;
     @NotNull(message = "Please, don't leave this field empty.")
-    @Min(value = 4)
+    @Size(min = 4)
     private String repeatPassword;
     
     public UserRequestDto() {
