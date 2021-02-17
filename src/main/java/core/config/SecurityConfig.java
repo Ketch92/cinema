@@ -21,14 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER");
     }
     
-    @Autowired
-    protected void config(HttpSecurity security) throws Exception {
+    protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
                 .and()
-                .httpBasic();
+                .httpBasic().and()
+                .csrf().disable();
     }
     
     @Bean
