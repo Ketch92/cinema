@@ -1,7 +1,7 @@
 package core.model.dto;
 
-import core.lib.ValidateEmail;
 import core.lib.FieldMatch;
+import core.lib.ValidateEmail;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
