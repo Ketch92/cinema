@@ -12,16 +12,17 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     public static final String ERROR_MESSAGE = "Error has occurred while retrieving the data";
     private final UserDao userDao;
-    private final PasswordEncoder hashPassword;
+    private final PasswordEncoder passwordEncoder;
     
-    public UserServiceImpl(UserDao userDao, PasswordEncoder hashPassword) {
+    public UserServiceImpl(UserDao userDao,
+                           PasswordEncoder hashPassword) {
         this.userDao = userDao;
-        this.hashPassword = hashPassword;
+        this.passwordEncoder = hashPassword;
     }
     
     @Override
     public User add(User user) {
-        user.setPassword(hashPassword.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.add(user);
     }
     
