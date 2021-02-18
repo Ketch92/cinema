@@ -25,7 +25,6 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status.value());
         
-        //TODO check for additional functionality
         
         List<String> errors = e.getBindingResult()
                 .getAllErrors()
