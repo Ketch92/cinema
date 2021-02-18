@@ -36,7 +36,7 @@ public class OrderController {
     public List<OrderResponseDto> getUserOrders(Authentication authentication) {
         UserDetails details = (UserDetails) authentication.getPrincipal();
         User user = userService.findByEmail(details.getUsername()).get();
-        return orderService.getOrdersHistory(userService.get(user.getId())).stream()
+        return orderService.getOrdersHistory(user).stream()
                 .map(orderToDtoMapper::mapToDto)
                 .collect(Collectors.toList());
     }
