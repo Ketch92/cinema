@@ -8,6 +8,7 @@ import core.service.mapper.ToDtoMapper;
 import core.service.mapper.ToEntityMapper;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +44,7 @@ public class CinemaHallController {
     }
     
     @PostMapping
-    public void addCinemaHall(@RequestBody CinemaHallRequestDto requestDto) {
+    public void addCinemaHall(@RequestBody @Valid CinemaHallRequestDto requestDto) {
         cinemaHallService.add(mapToEntity.mapToEntity(requestDto));
     }
 }

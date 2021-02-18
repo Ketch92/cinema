@@ -4,23 +4,24 @@ import core.dao.UserDao;
 import core.model.User;
 import core.model.exception.DataProcessingException;
 import core.service.UserService;
-import core.util.AuthenticationUtil;
 import java.util.Optional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     public static final String ERROR_MESSAGE = "Error has occurred while retrieving the data";
     private final UserDao userDao;
+    private final PasswordEncoder hashPassword;
     
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder hashPassword) {
         this.userDao = userDao;
+        this.hashPassword = hashPassword;
     }
     
     @Override
     public User add(User user) {
-        user.setSalt(AuthenticationUtil.getSalt());
-        user.setPassword(AuthenticationUtil.hashPassword(user.getPassword(), user.getSalt()));
+        user.setPassword(hashPassword.encode(user.getPassword()));
         return userDao.add(user);
     }
     

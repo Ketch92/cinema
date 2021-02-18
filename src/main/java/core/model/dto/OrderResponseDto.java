@@ -21,7 +21,7 @@ public class OrderResponseDto {
     }
     
     public void setTickets(List<Long> tickets) {
-        this.ticketIds = ticketIds;
+        this.ticketIds = tickets;
     }
     
     public Long getUserId() {
