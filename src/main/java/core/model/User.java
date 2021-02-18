@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +18,16 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    @ManyToOne
+    private Role userRole;
+    
+    public Role getUserRole() {
+        return userRole;
+    }
+    
+    public void setUserRole(Role userRole) {
+        this.userRole = userRole;
+    }
     
     public Long getId() {
         return id;
