@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class RoleDaoImpl extends AbstractDao<Role> implements RoleDao {
     public RoleDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -22,7 +24,7 @@ public class RoleDaoImpl extends AbstractDao<Role> implements RoleDao {
     public Optional<Role> getRoleByName(String roleName) {
         try (Session session = getSessionFactory().openSession()) {
             Query<Role> query = session.createQuery("from Role r"
-                                                    + " where r.authority = :roleName", Role.class);
+                                                    + " where r.roleName = :roleName", Role.class);
             query.setParameter("roleName", roleName);
             return query.uniqueResultOptional();
         } catch (Exception e) {

@@ -1,11 +1,13 @@
 package core.model;
 
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,14 +20,14 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    @ManyToOne
-    private Role userRole;
+    @ManyToMany
+    private Set<Role> userRole;
     
-    public Role getUserRole() {
+    public Set<Role> getUserRole() {
         return userRole;
     }
     
-    public void setUserRole(Role userRole) {
+    public void setUserRole(Set<Role> userRole) {
         this.userRole = userRole;
     }
     

@@ -1,7 +1,10 @@
 package core.security;
 
+import core.model.Role;
 import core.model.User;
 import core.service.UserService;
+import java.util.Collections;
+import java.util.stream.Collectors;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,6 +24,9 @@ public class CinemaUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Such user wasn't found!"));
         return org.springframework.security.core.userdetails.User
                         .withUsername(user.getEmail())
-                        .password(user.getPassword()).build();
+                        .password(user.getPassword())
+                .roles(user.getUserRole().stream()
+                        .map(Role::getRoleName)
+                        .toArray(String[]::new)).build();
     }
 }

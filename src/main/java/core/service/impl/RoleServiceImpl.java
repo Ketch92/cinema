@@ -3,9 +3,11 @@ package core.service.impl;
 import core.dao.RoleDao;
 import core.model.Role;
 import core.service.RoleService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RoleServiceImpl implements RoleService {
-    private RoleDao roleDao;
+    private final RoleDao roleDao;
     
     public RoleServiceImpl(RoleDao roleDao) {
         this.roleDao = roleDao;
