@@ -3,8 +3,6 @@ package core.security;
 import core.model.Role;
 import core.model.User;
 import core.service.UserService;
-import java.util.Collections;
-import java.util.stream.Collectors;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
