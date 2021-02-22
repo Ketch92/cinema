@@ -18,8 +18,6 @@ public class UserRequestDto {
     @NotNull(message = "Please, don't leave this field empty.")
     @Size(min = 4)
     private String repeatPassword;
-    @NotNull(message = "Please, don't leave this field empty.")
-    private Long roleId;
     
     public UserRequestDto() {
     }
@@ -27,15 +25,6 @@ public class UserRequestDto {
     public UserRequestDto(String email, String password, Long roleId) {
         this.email = email;
         this.password = password;
-        this.roleId = roleId;
-    }
-    
-    public Long getRoleId() {
-        return roleId;
-    }
-    
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
     }
     
     public String getRepeatPassword() {
