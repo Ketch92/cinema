@@ -1,5 +1,6 @@
 package core.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-/@Column(name = "role_name")
+    @Column(name = "role_name")
     private String roleName;
     
     public Role() {
