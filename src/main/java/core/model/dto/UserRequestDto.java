@@ -22,7 +22,7 @@ public class UserRequestDto {
     public UserRequestDto() {
     }
     
-    public UserRequestDto(String email, String password, Long roleId) {
+    public UserRequestDto(String email, String password) {
         this.email = email;
         this.password = password;
     }
