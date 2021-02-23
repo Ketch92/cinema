@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public abstract class AbstractDao<T> {
     private final SessionFactory sessionFactory;
     
