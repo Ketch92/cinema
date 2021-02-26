@@ -9,7 +9,7 @@ The service is a multilayer application with a database to store the data and en
 The app is developed with latest moder technologies of Java, Spring, Hibernate and RDMS.
 
 Before we step in, please fulfill following requirements:
-- Please, check if you have installed a Java of version 11 or later.
+- Please, check if you have installed Java of version 11 or later.
 
 - Copy the project and import it to your IDE.
 - Install Tomcat web server. 
@@ -17,10 +17,10 @@ Before we step in, please fulfill following requirements:
 - Install latest PostgreSQL. 
 - In the db.properties file write-down the database credentials.
 - Create a schema with a name 'cinema'.
-- The admin is automatically injected to the database at the first run.
+- The admin is automatically injected into the database at the first run.
 
-Now you are able to run the project. You will be redirected to log in page where you are able to login as admin.
-Also, you can go to localhost:8080/register endpoint and register as new user.
+Now you are able to run the project. You will be redirected to the log-in page where you are able to log in as admin.
+Also, you can go to localhost:8080/register endpoint and register as a new user.
 Here is the list of endpoints for your usage:
 - localhost:8080/register
 - localhost:8080/cinema-halls -> Get request -> retrieving all movie sessions.
