@@ -2,7 +2,7 @@
 
 We are happy to welcome you in our Cinema Service.
 
-We have design this web app service for users that have special taste and 
+We have designed this web app service for users that have special taste and 
 know what they want from life. It is a nice start of a good friendship.
 
 The service is a multilayer application with a database to store the data and encryption of your credentials.
